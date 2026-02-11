@@ -5,29 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kerala Resident Survey MIS</title>
     <style>
-        :root { --primary: #004d40; --secondary: #e0f2f1; --accent: #ffc107; --text: #333; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f3; padding: 15px; margin: 0; color: var(--text); }
-        .container { max-width: 850px; margin: 10px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: var(--primary); border-bottom: 3px solid var(--accent); padding-bottom: 10px; margin-top: 0; }
-        .status-bar { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; font-style: italic; }
-        .form-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        /* Color Palette and Font Updates */
+        :root { 
+            --primary: #0e5774; 
+            --secondary: #e7eff2; /* Light tint of primary for backgrounds */
+            --accent: #ffc107; 
+            --text: #333; 
+        }
+
+        body { 
+            font-family: "Times New Roman", Times, serif; 
+            background: #f0f4f5; 
+            padding: 15px; 
+            margin: 0; 
+            color: var(--text); 
+        }
+
+        .container { 
+            max-width: 850px; 
+            margin: 10px auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            border-top: 5px solid var(--primary);
+        }
+
+        h2 { 
+            text-align: center; 
+            color: var(--primary); 
+            border-bottom: 2px solid var(--secondary); 
+            padding-bottom: 10px; 
+            margin-top: 0; 
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .status-bar { 
+            text-align: center; 
+            font-size: 14px; 
+            color: #555; 
+            margin-bottom: 15px; 
+            font-style: italic; 
+        }
+
+        .form-section { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+
         .form-group { margin-bottom: 15px; }
-        .full-width { grid-column: span 2; }
-        label { display: block; font-weight: 600; margin-bottom: 8px; color: #444; }
-        select, input { width: 100%; padding: 12px; border: 1px solid #bbb; border-radius: 6px; font-size: 15px; box-sizing: border-box; }
-        select:focus, input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 8px rgba(0,77,64,0.1); }
-        .info-card { background: var(--secondary); padding: 15px; border-radius: 8px; border-left: 5px solid var(--primary); margin: 20px 0; display: none; line-height: 1.6; }
-        .btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
-        .btn:hover { background: #00695c; }
+
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: var(--primary); 
+        }
+
+        select, input { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #0e577480; 
+            border-radius: 4px; 
+            font-size: 16px; 
+            font-family: "Times New Roman", Times, serif;
+            box-sizing: border-box; 
+            background-color: #fff;
+        }
+
+        select:focus, input:focus { 
+            border-color: var(--primary); 
+            outline: none; 
+            box-shadow: 0 0 5px rgba(14, 87, 116, 0.2); 
+        }
+
+        .info-card { 
+            background: var(--secondary); 
+            padding: 15px; 
+            border-radius: 4px; 
+            border-left: 5px solid var(--primary); 
+            margin: 20px 0; 
+            display: none; 
+            line-height: 1.6;
+            color: var(--primary);
+        }
+
+        .btn { 
+            width: 100%; 
+            padding: 16px; 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            font-family: "Times New Roman", Times, serif;
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin-top: 15px; 
+            text-transform: uppercase;
+        }
+
+        .btn:hover { background: #0a435a; }
+
         .btn:disabled { background: #999; cursor: not-allowed; }
-        .hidden-field { display: none; margin-top: 10px; background: #fffde7; padding: 10px; border-radius: 6px; border: 1px dashed var(--accent); }
-        @media (max-width: 600px) { .form-section { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+
+        .hidden-field { 
+            display: none; 
+            margin-top: 10px; 
+            background: #fffde7; 
+            padding: 10px; 
+            border-radius: 4px; 
+            border: 1px dashed var(--primary); 
+        }
+
+        @media (max-width: 600px) { 
+            .form-section { grid-template-columns: 1fr; } 
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Resident Data Collection</h2>
+    <h2>KASE LSGI DATA COLLECTION</h2>
     <div id="status" class="status-bar">Syncing resident database (1159 records)...</div>
 
     <div class="form-section">
@@ -117,18 +219,16 @@
             </div>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn">SUBMIT TO GOOGLE SHEET</button>
+        <button type="submit" id="submitBtn" class="btn">SUBMIT</button>
     </form>
 </div>
 
 <script>
-// --- CONFIGURATION ---
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKvN5JmH8i9630U_TruAgE80075Em0w92oiw9oDWVYwykdBSxoon3rnxyJd1RsA9XI/exec";
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_sJx4dTdlu4TKkSXXrrSh3GRehmFxHC0SClqV_7dkyIOmXtvhIKXNywzqkkhn688PQ3UiERv-7yVk/pub?gid=0&single=true&output=csv";
 
 let masterData = [];
 
-// 1. Fetch live data from Google Sheets CSV link
 fetch(CSV_URL).then(res => res.text()).then(text => {
     const lines = text.split(/\r?\n/);
     const headers = lines[0].split(',');
@@ -143,7 +243,6 @@ fetch(CSV_URL).then(res => res.text()).then(text => {
     document.getElementById('status').innerText = "Database Linked: 1159 records ready.";
 });
 
-// 2. Initial setup for House names
 function initDropdowns() {
     const hSelect = document.getElementById('houseSelect');
     const houses = [...new Set(masterData.map(r => r["House Name"]))].sort();
@@ -152,7 +251,6 @@ function initDropdowns() {
     hSelect.disabled = false;
 }
 
-// 3. Logic: Select House -> Show People
 document.getElementById('houseSelect').onchange = function() {
     const nSelect = document.getElementById('nameSelect');
     nSelect.innerHTML = '<option value="">-- Select Name --</option>';
@@ -162,7 +260,6 @@ document.getElementById('houseSelect').onchange = function() {
     document.getElementById('infoCard').style.display = 'none';
 };
 
-// 4. Logic: Select Person -> Show Profile
 document.getElementById('nameSelect').onchange = function() {
     if(!this.value) return;
     const p = masterData.find(r => r["New SEC ID No."] === this.value);
@@ -170,14 +267,12 @@ document.getElementById('nameSelect').onchange = function() {
     document.getElementById('infoCard').style.display = 'block';
 };
 
-// 5. Logic: Handle "Others" visibility
 function toggleOthers(sid, did) {
     const isOthers = document.getElementById(sid).value === "Others";
     document.getElementById(did).style.display = isOthers ? "block" : "none";
     document.getElementById(did).querySelector('input').required = isOthers;
 }
 
-// 6. Logic: Submit to Google Sheet
 document.getElementById('surveyForm').onsubmit = function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
@@ -196,7 +291,6 @@ document.getElementById('surveyForm').onsubmit = function(e) {
         professional_status: document.getElementById('statusCategory').value
     };
 
-    // Logic: no-cors is used to ensure Google Script redirect doesn't trigger a failure alert
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -212,7 +306,7 @@ document.getElementById('surveyForm').onsubmit = function(e) {
     })
     .catch(err => alert("Network Error. Please verify your connection."))
     .finally(() => {
-        btn.innerText = "SUBMIT TO GOOGLE SHEET";
+        btn.innerText = "SUBMIT";
         btn.disabled = false;
     });
 };

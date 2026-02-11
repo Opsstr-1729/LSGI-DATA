@@ -3,326 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kerala Resident Survey MIS</title>
+    <title>KASE LSGI Data Collection Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Color Palette and Font Updates */
-        :root { 
-            --primary: #0e5774; 
-            --secondary: #e7eff2; /* Light tint of primary for backgrounds */
-            --accent: #ffc107; 
-            --text: #333; 
+        :root {
+            --primary: #0e5774;
+            --primary-light: #166e92;
+            --primary-tint: #f4f8fa;
+            --border: #d1d9dd;
+            --text-main: #1a202c;
+            --text-muted: #4a5568;
+            --white: #ffffff;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        body { 
-            font-family: "Times New Roman", Times, serif; 
-            background: #f0f4f5; 
-            padding: 15px; 
-            margin: 0; 
-            color: var(--text); 
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container { 
-            max-width: 850px; 
-            margin: 10px auto; 
-            background: white; 
-            padding: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            border-top: 5px solid var(--primary);
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.5;
+            margin: 0;
+            padding: 40px 20px;
         }
 
-        h2 { 
-            text-align: center; 
-            color: var(--primary); 
-            border-bottom: 2px solid var(--secondary); 
-            padding-bottom: 10px; 
-            margin-top: 0; 
+        /* Container & Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background-color: var(--primary);
+            padding: 32px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        h2 {
+            margin: 0;
             font-size: 24px;
-            letter-spacing: 1px;
-        }
-
-        .status-bar { 
-            text-align: center; 
-            font-size: 14px; 
-            color: #555; 
-            margin-bottom: 15px; 
-            font-style: italic; 
-        }
-
-        .form-section { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-        }
-
-        .form-group { margin-bottom: 15px; }
-
-        label { 
-            display: block; 
-            font-weight: bold; 
-            margin-bottom: 8px; 
-            color: var(--primary); 
-        }
-
-        select, input { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #0e577480; 
-            border-radius: 4px; 
-            font-size: 16px; 
-            font-family: "Times New Roman", Times, serif;
-            box-sizing: border-box; 
-            background-color: #fff;
-        }
-
-        select:focus, input:focus { 
-            border-color: var(--primary); 
-            outline: none; 
-            box-shadow: 0 0 5px rgba(14, 87, 116, 0.2); 
-        }
-
-        .info-card { 
-            background: var(--secondary); 
-            padding: 15px; 
-            border-radius: 4px; 
-            border-left: 5px solid var(--primary); 
-            margin: 20px 0; 
-            display: none; 
-            line-height: 1.6;
-            color: var(--primary);
-        }
-
-        .btn { 
-            width: 100%; 
-            padding: 16px; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            border-radius: 4px; 
-            font-size: 18px; 
-            font-weight: bold; 
-            font-family: "Times New Roman", Times, serif;
-            cursor: pointer; 
-            transition: 0.3s; 
-            margin-top: 15px; 
+            font-weight: 700;
+            letter-spacing: -0.02em;
             text-transform: uppercase;
         }
 
-        .btn:hover { background: #0a435a; }
-
-        .btn:disabled { background: #999; cursor: not-allowed; }
-
-        .hidden-field { 
-            display: none; 
-            margin-top: 10px; 
-            background: #fffde7; 
-            padding: 10px; 
-            border-radius: 4px; 
-            border: 1px dashed var(--primary); 
+        .status-bar {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            font-size: 13px;
+            display: inline-block;
+            border-radius: 20px;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        @media (max-width: 600px) { 
-            .form-section { grid-template-columns: 1fr; } 
+        /* Form Content Structure */
+        .form-content {
+            padding: 40px;
         }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--primary-tint);
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Form Elements Styling */
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        select, input {
+            appearance: none;
+            background-color: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 15px;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230e5774'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14, 87, 116, 0.1);
+        }
+
+        /* Resident Info Card */
+        .info-card {
+            background-color: var(--primary-tint);
+            border: 1px solid rgba(14, 87, 116, 0.15);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 32px;
+            display: none; /* Controlled by existing JS */
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-card strong {
+            color: var(--primary);
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        #pDetails {
+            display: block;
+            margin-top: 8px;
+            font-size: 15px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Action Button */
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 16px 32px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(14, 87, 116, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background-color: var(--border);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 14px;
+            padding: 32px;
+            font-size: 12px;
+            font-weight: 700;
             color: var(--primary);
-            font-weight: bold;
-            letter-spacing: 1px;
-            opacity: 0.8;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Hidden Field styling */
+        .hidden-field {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: #fdfdfd;
+            border: 1px dashed var(--primary);
+            border-radius: 6px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .form-content { padding: 24px; }
+            header { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>KASE LSGI DATA COLLECTION</h2>
-    <div id="status" class="status-bar">Syncing resident database (1159 records)...</div>
+    <header>
+        <h2>KASE LSGI Data Collection</h2>
+        <div id="status" class="status-bar">Initializing database...</div>
+    </header>
 
-    <div class="form-section">
-        <div class="form-group">
-            <label>Select House Name</label>
-            <select id="houseSelect" disabled><option value="">Loading houses...</option></select>
-        </div>
-        <div class="form-group">
-            <label>Select Resident</label>
-            <select id="nameSelect" disabled><option value="">-- Choose House --</option></select>
-        </div>
-    </div>
-
-    <div id="infoCard" class="info-card">
-        <strong>Resident Profile:</strong><br>
-        <span id="pDetails"></span>
-    </div>
-
-    <form id="surveyForm">
-        <div class="form-section">
+    <div class="form-content">
+        <div class="section-title">01. Resident Identification</div>
+        <div class="form-grid">
             <div class="form-group">
-                <label>Educational Qualification</label>
-                <select id="edu" required onchange="toggleOthers('edu', 'eduOthers')">
-                    <option value="">-- Select --</option>
-                    <option value="Below 7th">Below 7th</option>
-                    <option value="7th Standard">7th Standard</option>
-                    <option value="10th (SSLC)">10th (SSLC)</option>
-                    <option value="Plus Two (HSE)">Plus Two (HSE)</option>
-                    <option value="ITI">ITI</option>
-                    <option value="Polytechnic Diploma">Polytechnic Diploma</option>
-                    <option value="Bachelors Degree">Bachelors Degree</option>
-                    <option value="B.Tech/Engineering">B.Tech/Engineering</option>
-                    <option value="Masters/PG">Masters/PG</option>
-                    <option value="Others">Others</option>
+                <label>House Name / Number</label>
+                <select id="houseSelect" disabled>
+                    <option value="">Loading houses...</option>
                 </select>
-                <div id="eduOthers" class="hidden-field">
-                    <label>Specify Qualification</label>
-                    <input type="text" id="edu_other_val" placeholder="Type here...">
+            </div>
+            <div class="form-group">
+                <label>Resident Full Name</label>
+                <select id="nameSelect" disabled>
+                    <option value="">-- Choose House First --</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="infoCard" class="info-card">
+            <strong>Profile</strong>
+            <span id="pDetails"></span>
+        </div>
+
+        <form id="surveyForm">
+            <div class="section-title">02. Socio-Economic Details</div>
+            <div class="form-grid">
+                
+                <div class="form-group">
+                    <label>Educational Qualification</label>
+                    <select id="edu" required onchange="toggleOthers('edu', 'eduOthers')">
+                        <option value="">-- Select Qualification --</option>
+                        <option value="Below 7th">Below 7th</option>
+                        <option value="7th Standard">7th Standard</option>
+                        <option value="10th (SSLC)">10th (SSLC)</option>
+                        <option value="Plus Two (HSE)">Plus Two (HSE)</option>
+                        <option value="ITI">ITI</option>
+                        <option value="Polytechnic Diploma">Polytechnic Diploma</option>
+                        <option value="Bachelors Degree">Bachelors Degree</option>
+                        <option value="B.Tech/Engineering">B.Tech/Engineering</option>
+                        <option value="Masters/PG">Masters/PG</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <div id="eduOthers" class="hidden-field">
+                        <label>Specify Qualification</label>
+                        <input type="text" id="edu_other_val" placeholder="Enter custom qualification">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mode of Study</label>
+                    <select id="mode" required>
+                        <option value="Regular">Regular</option>
+                        <option value="Distance">Distance</option>
+                        <option value="Part-time">Part-time</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Employment Category</label>
+                    <select id="workType" required onchange="toggleOthers('workType', 'workOthers')">
+                        <option value="">-- Select Work Category --</option>
+                        <option value="Private Sector">Private Sector</option>
+                        <option value="Public Sector (Govt)">Public Sector (Govt)</option>
+                        <option value="Self-Employed">Self-Employed</option>
+                        <option value="Business Owner">Business Owner</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <div id="workOthers" class="hidden-field">
+                        <label>Specify Category</label>
+                        <input type="text" id="work_other_val" placeholder="Enter work category">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Work Experience (Years)</label>
+                    <input type="number" id="exp" min="0" value="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Job Role / Occupation</label>
+                    <input type="text" id="occupation" placeholder="e.g. Accountant, Driver, Shop Owner" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Professional Status</label>
+                    <select id="statusCategory" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Unemployed">Unemployed</option>
+                        <option value="Underemployed">Underemployed</option>
+                        <option value="Mid-career Professional">Mid-career Professional</option>
+                        <option value="Returning Emigrants">Returning Emigrants</option>
+                        <option value="Traditional Sector Workers">Traditional Sector Workers</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Study Mode</label>
-                <select id="mode" required>
-                    <option value="Regular">Regular</option>
-                    <option value="Distance">Distance</option>
-                    <option value="Part-time">Part-time</option>
-                </select>
-            </div>
+            <button type="submit" id="submitBtn" class="btn">
+                Submit
+            </button>
+        </form>
+    </div>
 
-            <div class="form-group">
-                <label>Work Type</label>
-                <select id="workType" required onchange="toggleOthers('workType', 'workOthers')">
-                    <option value="">-- Select --</option>
-                    <option value="Private Sector">Private Sector</option>
-                    <option value="Public Sector (Govt)">Public Sector (Govt)</option>
-                    <option value="Self-Employed">Self-Employed</option>
-                    <option value="Business Owner">Business Owner</option>
-                    <option value="Others">Others</option>
-                </select>
-                <div id="workOthers" class="hidden-field">
-                    <label>Specify Work Type</label>
-                    <input type="text" id="work_other_val" placeholder="Type here...">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Work Experience (Years)</label>
-                <input type="number" id="exp" min="0" value="0" required>
-            </div>
-
-            <div class="form-group">
-                <label>What do they do for living?</label>
-                <input type="text" id="occupation" placeholder="Current job role" required>
-            </div>
-
-            <div class="form-group">
-                <label>Professional Status</label>
-                <select id="statusCategory" required>
-                    <option value="">-- Select --</option>
-                    <option value="Unemployed">Unemployed</option>
-                    <option value="Underemployed">Underemployed</option>
-                    <option value="Mid-career Professional">Mid-career Professional</option>
-                    <option value="Returning Emigrants">Returning Emigrants</option>
-                    <option value="Traditional Sector Workers">Traditional Sector Workers</option>
-                </select>
-            </div>
-        </div>
-
-        <button type="submit" id="submitBtn" class="btn">SUBMIT</button>
-        <div class="footer">
+    <div class="footer">
         Powered by KASE IT 2026
     </div>
-    </form>
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKvN5JmH8i9630U_TruAgE80075Em0w92oiw9oDWVYwykdBSxoon3rnxyJd1RsA9XI/exec";
-const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_sJx4dTdlu4TKkSXXrrSh3GRehmFxHC0SClqV_7dkyIOmXtvhIKXNywzqkkhn688PQ3UiERv-7yVk/pub?gid=0&single=true&output=csv";
+    /* IMPORTANT: All logic below is compatible with your existing DOM 
+       using SCRIPT_URL and CSV_URL provided previously.
+    */
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKvN5JmH8i9630U_TruAgE80075Em0w92oiw9oDWVYwykdBSxoon3rnxyJd1RsA9XI/exec";
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_sJx4dTdlu4TKkSXXrrSh3GRehmFxHC0SClqV_7dkyIOmXtvhIKXNywzqkkhn688PQ3UiERv-7yVk/pub?gid=0&single=true&output=csv";
 
-let masterData = [];
+    let masterData = [];
 
-fetch(CSV_URL).then(res => res.text()).then(text => {
-    const lines = text.split(/\r?\n/);
-    const headers = lines[0].split(',');
-    masterData = lines.slice(1).map(line => {
-        const row = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        let obj = {};
-        headers.forEach((h, i) => { if(row[i]) obj[h.trim()] = row[i].trim(); });
-        return obj;
-    }).filter(i => i.Name);
-    
-    initDropdowns();
-    document.getElementById('status').innerText = "Database Linked: 1159 records ready.";
-});
+    // Fetch live data
+    fetch(CSV_URL).then(res => res.text()).then(text => {
+        const lines = text.split(/\r?\n/);
+        const headers = lines[0].split(',');
+        masterData = lines.slice(1).map(line => {
+            const row = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            let obj = {};
+            headers.forEach((h, i) => { if(row[i]) obj[h.trim()] = row[i].trim(); });
+            return obj;
+        }).filter(i => i.Name);
+        
+        initDropdowns();
+        document.getElementById('status').innerText = "Live System Active: 1,159 Records Syncing";
+    });
 
-function initDropdowns() {
-    const hSelect = document.getElementById('houseSelect');
-    const houses = [...new Set(masterData.map(r => r["House Name"]))].sort();
-    hSelect.innerHTML = '<option value="">-- Select House --</option>';
-    houses.forEach(h => { hSelect.innerHTML += `<option value="${h}">${h}</option>`; });
-    hSelect.disabled = false;
-}
+    function initDropdowns() {
+        const hSelect = document.getElementById('houseSelect');
+        const houses = [...new Set(masterData.map(r => r["House Name"]))].sort();
+        hSelect.innerHTML = '<option value="">-- Select House --</option>';
+        houses.forEach(h => { hSelect.innerHTML += `<option value="${h}">${h}</option>`; });
+        hSelect.disabled = false;
+    }
 
-document.getElementById('houseSelect').onchange = function() {
-    const nSelect = document.getElementById('nameSelect');
-    nSelect.innerHTML = '<option value="">-- Select Name --</option>';
-    const people = masterData.filter(r => r["House Name"] === this.value);
-    people.forEach(p => { nSelect.innerHTML += `<option value="${p["New SEC ID No."]}">${p.Name}</option>`; });
-    nSelect.disabled = false;
-    document.getElementById('infoCard').style.display = 'none';
-};
-
-document.getElementById('nameSelect').onchange = function() {
-    if(!this.value) return;
-    const p = masterData.find(r => r["New SEC ID No."] === this.value);
-    document.getElementById('pDetails').innerHTML = `<strong>SEC ID:</strong> ${p["New SEC ID No."]} | <strong>Age/Gender:</strong> ${p["Gender / Age"]} <br> <strong>Guardian:</strong> ${p["Guardian's Name"]}`;
-    document.getElementById('infoCard').style.display = 'block';
-};
-
-function toggleOthers(sid, did) {
-    const isOthers = document.getElementById(sid).value === "Others";
-    document.getElementById(did).style.display = isOthers ? "block" : "none";
-    document.getElementById(did).querySelector('input').required = isOthers;
-}
-
-document.getElementById('surveyForm').onsubmit = function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.innerText = "Syncing with Row...";
-    btn.disabled = true;
-
-    const p = masterData.find(r => r["New SEC ID No."] === document.getElementById('nameSelect').value);
-    
-    const payload = {
-        sec_id: p["New SEC ID No."],
-        qualification: document.getElementById('edu').value === "Others" ? document.getElementById('edu_other_val').value : document.getElementById('edu').value,
-        mode: document.getElementById('mode').value,
-        work_type: document.getElementById('workType').value === "Others" ? document.getElementById('work_other_val').value : document.getElementById('workType').value,
-        experience: document.getElementById('exp').value,
-        living_source: document.getElementById('occupation').value,
-        professional_status: document.getElementById('statusCategory').value
+    document.getElementById('houseSelect').onchange = function() {
+        const nSelect = document.getElementById('nameSelect');
+        nSelect.innerHTML = '<option value="">-- Select Name --</option>';
+        const people = masterData.filter(r => r["House Name"] === this.value);
+        people.forEach(p => { nSelect.innerHTML += `<option value="${p["New SEC ID No."]}">${p.Name}</option>`; });
+        nSelect.disabled = false;
+        document.getElementById('infoCard').style.display = 'none';
     };
 
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        alert("Success! The sheet row for " + p.Name + " has been updated.");
-        this.reset();
-        document.getElementById('infoCard').style.display = 'none';
-        document.getElementById('eduOthers').style.display = 'none';
-        document.getElementById('workOthers').style.display = 'none';
-    })
-    .catch(err => alert("Network Error. Please verify your connection."))
-    .finally(() => {
-        btn.innerText = "SUBMIT";
-        btn.disabled = false;
-    });
-};
+    document.getElementById('nameSelect').onchange = function() {
+        if(!this.value) return;
+        const p = masterData.find(r => r["New SEC ID No."] === this.value);
+        document.getElementById('pDetails').innerHTML = `SEC ID: ${p["New SEC ID No."]} • Age: ${p["Gender / Age"]} • Guardian: ${p["Guardian's Name"]}`;
+        document.getElementById('infoCard').style.display = 'block';
+    };
+
+    function toggleOthers(sid, did) {
+        const isOthers = document.getElementById(sid).value === "Others";
+        document.getElementById(did).style.display = isOthers ? "block" : "none";
+        document.getElementById(did).querySelector('input').required = isOthers;
+    }
+
+    document.getElementById('surveyForm').onsubmit = function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "Syncing Data...";
+        btn.disabled = true;
+
+        const p = masterData.find(r => r["New SEC ID No."] === document.getElementById('nameSelect').value);
+        
+        const payload = {
+            sec_id: p["New SEC ID No."],
+            qualification: document.getElementById('edu').value === "Others" ? document.getElementById('edu_other_val').value : document.getElementById('edu').value,
+            mode: document.getElementById('mode').value,
+            work_type: document.getElementById('workType').value === "Others" ? document.getElementById('work_other_val').value : document.getElementById('workType').value,
+            experience: document.getElementById('exp').value,
+            living_source: document.getElementById('occupation').value,
+            professional_status: document.getElementById('statusCategory').value
+        };
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            alert("Record Submitted");
+            this.reset();
+            document.getElementById('infoCard').style.display = 'none';
+            document.getElementById('eduOthers').style.display = 'none';
+            document.getElementById('workOthers').style.display = 'none';
+        })
+        .catch(err => alert("Sync failure. Please check network connectivity."))
+        .finally(() => {
+            btn.innerText = "Submit";
+            btn.disabled = false;
+        });
+    };
 </script>
 
 </body>
